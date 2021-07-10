@@ -1,0 +1,20 @@
+{
+    "baseUrl": "https://app.kyubi.io",
+    "includeShadowDom": true,
+    "chromeWebSecurity": false,
+    "integrationFolder": "cypress/integration/course",
+    "screenshotsFolder": "cypress/reports/mochareports/assets",
+    "video": false,
+    "screenshotOnRunFailure": true,
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+      "reporterEnabled": "mochawesome",
+      "mochawesomeReporterOptions": {
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      }
+    }
+  }
