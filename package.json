@@ -1,0 +1,41 @@
+{
+  "name": "day1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "clean:reports": "if exist cypress\\reports rmdir /s/q cypress\\reports && mkdir cypress\\reports mkdir cypress\\reports\\mochareports",
+    "pretest": "npm run clean:reports",
+    "scripts": "cypress run",
+    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+    "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
+    "posttest": "npm run combine-reports && npm run generate-report",
+    "test": "npm run scripts || npm run posttest",
+    "test-cfg": "cypress open --config pageLoadTimeout=30000,baseUrl=https://reddit.com",
+    "test-stagejson": "cypress open --config-file ./stage.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@bahmutov/cy-api": "^1.4.3",
+    "@percy/cypress": "^2.3.4",
+    "axe-core": "^4.1.1",
+    "cypress": "^7.7.0",
+    "cypress-axe": "^0.12.0",
+    "cypress-file-upload": "^5.0.2",
+    "cypress-multi-reporters": "^1.4.0",
+    "cypress-plugin-snapshots": "^1.4.4",
+    "cypress-xpath": "^1.6.1",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0",
+    "mysql": "^2.18.1",
+    "sync-sql": "^1.0.2",
+    "xlsx": "^0.16.9"
+  },
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^1.6.0"
+  }
+}
