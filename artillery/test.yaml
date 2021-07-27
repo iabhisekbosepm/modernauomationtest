@@ -1,0 +1,43 @@
+#Report online viewer link: https://reportviewer.artillery.io/
+#Run this code via: artillery run --output report.json test.yaml
+#local report in html generator: artillery report --output report.html report.json
+#Based on Enviroment run: artillery run --environment local-dev my-script.yaml
+config:
+  target: "https://l53cx44o26.execute-api.us-east-1.amazonaws.com/dev/login"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      name: Warm up
+    #- duration: 10
+    #  arrivalRate: 5
+    #  rampTo: 50
+    #  name: Ramp up load
+    #- duration: 10
+    #  arrivalRate: 50
+    #  name: Sustained load
+  environments:
+    local-dev:
+      target: "https://l53cx44o26.execute-api.us-east-1.amazonaws.com/dev/login"
+      phases:
+      - arrivalRate: 10
+        duration: 10
+    preprod:
+      target: "https://service-foo.preprod.acmecorp.digital"    
+  #payload:
+  #    path: "keywords.csv"
+  #    fields:
+  #      - "keyword"
+scenarios:
+  - name: "Login"
+    flow:
+      - post:
+          url: "/"
+          json:
+            kw: "{'email': 'payel@gmail.com','password': '123456'}"
+          capture:
+            - json: "$.results[0].id"
+              as: "productId"
+      #- get:
+      #    url: "https://tq5eh4daa1.execute-api.us-east-1.amazonaws.com/dev/group/603e42865e257524e35660c9"
+      #- think: 5       
+  

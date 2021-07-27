@@ -1,0 +1,14 @@
+config:
+  target: "https://z7c5j0fjy8.execute-api.us-east-2.amazonaws.com"
+  phases:
+    - duration: 10
+      arrivalRate: 100
+scenarios:
+  - flow:
+      - post:
+          url: "/dev/genderapi"
+          json:
+            name: "Bisakha"
+          capture:
+            json: "$.body.countryName"
+            as: "CountryName"
